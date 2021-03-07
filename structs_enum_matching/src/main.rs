@@ -81,6 +81,24 @@ where
     x * x
 }
 
+enum Symbol {
+    Btc,
+    Dot,
+    Eth,
+}
+
+impl Symbol {
+    fn as_str(&self) -> &'static str {
+        match *self {
+            Symbol::Btc => "BTC",
+            Symbol::Dot => "DOT",
+            Symbol::Eth => "ETH",
+        }
+    }
+}
+
 fn main() {
-    print!("{}", sqrt(2))
+    let btc = Symbol::Btc;
+
+    print!("{}", btc.as_str())
 }
