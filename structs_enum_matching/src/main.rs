@@ -74,8 +74,13 @@ impl Iterator for FRange {
     }
 }
 
+fn sqrt<T>(x: T) -> T::Output
+where
+    T: std::ops::Mul + Copy,
+{
+    x * x
+}
+
 fn main() {
-    for x in range(0.0, 1.0, 0.1) {
-        println!("{:.1}", x);
-    }
+    print!("{}", sqrt(2))
 }
