@@ -46,7 +46,36 @@ impl fmt::Debug for Asset {
     }
 }
 
+struct FRange {
+    val: f64,
+    end: f64,
+    incr: f64,
+}
+
+fn range(x1: f64, x2: f64, skip: f64) -> FRange {
+    FRange {
+        val: x1,
+        end: x2,
+        incr: skip,
+    }
+}
+
+impl Iterator for FRange {
+    type Item = f64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let result = self.val;
+        if result >= self.end {
+            None
+        } else {
+            self.val += self.incr;
+            Some(result)
+        }
+    }
+}
+
 fn main() {
-    let asset = Asset::new("Bitcoin".to_string(), "BTC".to_string());
-    print!("{:?}", asset);
+    for x in range(0.0, 1.0, 0.1) {
+        println!("{:.1}", x);
+    }
 }
