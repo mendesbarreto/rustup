@@ -2,11 +2,11 @@ use std::fmt;
 
 struct Asset {
     name: String,
-    symbol: String,
+    symbol: Symbol,
 }
 
 impl Asset {
-    fn new(name: String, symbol: String) -> Asset {
+    fn new(name: String, symbol: Symbol) -> Asset {
         Asset {
             name: name,
             symbol: symbol,
@@ -14,29 +14,14 @@ impl Asset {
     }
 
     fn to_string(&self) -> String {
-        format!("Asset: {}, Symbol: {}", self.name, self.symbol)
+        format!("Asset: {}, Symbol: {}", self.name, self.symbol.as_str())
     }
-    fn set_symbol(&mut self, symbol: String) {
+
+    fn set_symbol(&mut self, symbol: Symbol) {
         self.symbol = symbol;
     }
     fn set_name(&mut self, name: String) {
         self.name = name;
-    }
-}
-
-trait Print {
-    fn print(&self);
-}
-
-impl Print for i32 {
-    fn print(&self) {
-        print!("{}", self);
-    }
-}
-
-impl Print for Asset {
-    fn print(&self) {
-        print!("{}", self.to_string());
     }
 }
 
@@ -98,7 +83,11 @@ impl Symbol {
 }
 
 fn main() {
-    let btc = Symbol::Btc;
+    let bitcoin = Asset::new("Bitcoin".to_string(), Symbol::Btc);
+    let shitcoin = Asset {
+        name: "Shitcoin".to_string(),
+        ..bitcoin
+    };
 
-    print!("{}", btc.as_str())
+    print!("{:?}", shitcoin);
 }
