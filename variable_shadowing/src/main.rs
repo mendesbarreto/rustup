@@ -1,5 +1,5 @@
-fn main() {
 
+fn shadowed_binding() {
     let shadowed_binding = 1;
 
     {
@@ -16,4 +16,9 @@ fn main() {
     let shadowed_binding = 2;
 
     println!("shadowed in outer block: {}", shadowed_binding);
+}
+
+
+fn main() {
+    shadowed_binding()
 }
