@@ -23,7 +23,7 @@ fn change(string: &mut String, value: &String) {
 
 fn change_with_string_mutation() {
     let mut value = "Douglas".to_string();
-    change( &mut value, &" Mendes".to_string());
+    change(&mut value, &" Mendes".to_string());
     println!("{}", value);
 }
 
@@ -48,6 +48,13 @@ fn mutiple_mutable_pointers_to_same_address() {
     println!("{}", string_ref3);
 }
 
+
+// fn dangle() -> &String {
+//     let string = String::from("What the hell?");
+//     // This is not working because the string which owns the value will be dropped and the memory will be released
+//     // after the method is finished.
+//     return &string;
+// }
 
 fn main() {
     change_with_string_mutation();
