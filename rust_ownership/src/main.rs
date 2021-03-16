@@ -40,11 +40,11 @@ fn mutiple_mutable_pointers_to_same_address() {
 
     let string_ref = &string;
     let string_ref2 = &string;
+
     println!("{}, {}", string_ref, string_ref2);
 
     // This is allowed because these scopes don’t overlap, so this code is allowed.
     let string_ref3 = &mut string;
-
     println!("{}", string_ref3);
 }
 
@@ -56,6 +56,43 @@ fn mutiple_mutable_pointers_to_same_address() {
 //     return &string;
 // }
 
+
+fn first_word_index(string: &str) -> usize {
+    let bytes = string.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    string.len()
+}
+
+fn first_word(string: &str) -> &str {
+    let bytes = string.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &string[0..i];
+        }
+    }
+
+    &string[..]
+}
+
+
 fn main() {
-    change_with_string_mutation();
+    let mut string = "Rust rules".to_string();
+    // This way of try to find the first world will lead to possible bugs
+    // Because after I retrieved where the first word is, I can clear my string and if I try to
+    // find the index, fore sure it will crash
+    let word = first_word(&string);
+
+    // Now the code will rise an error, becuase we have a string slice which depends on the main string
+    // and the compiler could warn about it.
+    //https://doc.rust-lang.org/book/ch04-03-slices.html
+    //string.clear();
+
+    println!("{}", word);
 }
