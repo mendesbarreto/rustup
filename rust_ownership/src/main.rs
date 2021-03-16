@@ -40,8 +40,12 @@ fn mutiple_mutable_pointers_to_same_address() {
 
     let string_ref = &string;
     let string_ref2 = &string;
-
     println!("{}, {}", string_ref, string_ref2);
+
+    // This is allowed because these scopes don’t overlap, so this code is allowed.
+    let string_ref3 = &mut string;
+
+    println!("{}", string_ref3);
 }
 
 
