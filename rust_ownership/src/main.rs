@@ -7,7 +7,7 @@ fn borrow_variable() {
 
     // this is allowed because int is considered simple values so they are copied into
     let value = 5;
-    let value2 = value;
+    let _ = value;
     println!("{}", value);
 }
 
@@ -21,10 +21,30 @@ fn change(string: &mut String, value: &String) {
     string.push_str(value);
 }
 
-fn main() {
+fn change_with_string_mutation() {
     let mut value = "Douglas".to_string();
-
     change( &mut value, &" Mendes".to_string());
-
     println!("{}", value);
+}
+
+fn mutiple_mutable_pointers_to_same_address() {
+    let mut string = String::from("Hello buddy");
+
+    // Not allowed
+    //let string_ref2 = &mut string;
+    //let string_ref = &mut string;
+
+    // Not allowed
+    //let string_ref2 = &string;
+    //let string_ref = &mut string;
+
+    let string_ref = &string;
+    let string_ref2 = &string;
+
+    println!("{}, {}", string_ref, string_ref2);
+}
+
+
+fn main() {
+    change_with_string_mutation();
 }
