@@ -81,13 +81,13 @@ fn first_word(string: &str) -> &str {
     &string[..]
 }
 
-
 fn main() {
     let mut string = "Rust rules".to_string();
     // This way of try to find the first world will lead to possible bugs
     // Because after I retrieved where the first word is, I can clear my string and if I try to
     // find the index, fore sure it will crash
     let word = first_word(&string);
+    let substring = word;
 
     // Now the code will rise an error, becuase we have a string slice which depends on the main string
     // and the compiler could warn about it.
